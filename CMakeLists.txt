@@ -1,6 +1,12 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.6)
 project(Lissajous)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 
-add_executable(Lissajous main.cpp)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+link_directories(${PROJECT_SOURCE_DIR}/lib/x64)
+
+set(SOURCE_FILES src/main.cpp)
+add_executable(Lissajous ${SOURCE_FILES})
+target_link_libraries(Lissajous SDL2main SDL2)
