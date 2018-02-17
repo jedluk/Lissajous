@@ -13,8 +13,8 @@ using namespace std;
 class Screen
 {
 public:
-    const static int SCREEN_WIDTH = 800;
-    const static int SCREEN_HEIGHT = 600;
+    const static int SCREEN_WIDTH = 1280;
+    const static int SCREEN_HEIGHT = 720;
 private:
     SDL_Window *m_window;
     SDL_Renderer *m_renderer;

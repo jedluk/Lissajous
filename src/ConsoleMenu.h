@@ -9,6 +9,7 @@
 class ConsoleMenu {
 public:
     static void generateInitialContent();
+    static void printManual();
 };
 
 
