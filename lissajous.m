@@ -23,7 +23,7 @@ coefficients = [A w_x s_x B w_y s_y];
 for i = 1:iterations
     x = coefficients(1) * cos(coefficients(2).*t - coefficients(3));
     y = coefficients(4) * cos(coefficients(5).*t - coefficients(6));
-    coefficients = updateValues(coefficients, rand(1), rand(1));
+    coefficients = updateValues(coefficients, 2*rand(1), 5*rand(1));
     figure()
     plot(x,y)
 end
