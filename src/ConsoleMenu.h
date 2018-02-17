@@ -7,7 +7,8 @@
 
 
 class ConsoleMenu {
-
+public:
+    static void generateInitialContent();
 };
 
 

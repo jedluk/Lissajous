@@ -1,11 +1,12 @@
 #include "Screen.h"
+#include <string>
 
 Screen::Screen() :
         m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer1(NULL), m_buffer2(NULL) {
 
 }
 
-Screen::~Screen(){
+Screen::~Screen() {
 
 }
 
@@ -57,15 +58,18 @@ bool Screen::init() {
 bool Screen::processEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
-            return false;
+        switch (event.type) {
+            case SDL_QUIT:
+                return false;
+            case SDL_KEYDOWN:
+                cout << event.key.keysym.sym << endl;
         }
     }
     return true;
 }
 
 void Screen::boxBlur() {
-    // Swap the buffers, so pixel is in m_buffer2 and we are drawing to m_buffer1
+    //A Swap the buffers, so pixel is in m_buffer2 and we are drawing to m_buffer1
     Uint32 *temp = m_buffer1;
     m_buffer1 = m_buffer2;
     m_buffer2 = temp;
@@ -83,11 +87,11 @@ void Screen::boxBlur() {
                     int currentY = y + row;
 
                     if (currentX >= 0 && currentX < SCREEN_WIDTH && currentY >= 0 && currentY < SCREEN_HEIGHT) {
-                        Uint32 color = m_buffer2[currentY*SCREEN_WIDTH + currentX];
+                        Uint32 color = m_buffer2[currentY * SCREEN_WIDTH + currentX];
 
-                        Uint8 red	= color >> 24;
-                        Uint8 green = color >> 16;
-                        Uint8 blue	= color >> 8;
+                        auto red = static_cast<Uint8>(color >> 24);
+                        auto green = static_cast<Uint8>(color >> 16);
+                        auto blue = static_cast<Uint8>(color >> 8);
 
                         redTotal += red;
                         greenTotal += green;
@@ -96,9 +100,9 @@ void Screen::boxBlur() {
                 }
             }
 
-            Uint8 red = redTotal / 9;
-            Uint8 green = greenTotal / 9;
-            Uint8 blue = blueTotal / 9;
+            auto red = static_cast<Uint8>(redTotal / 9);
+            auto green = static_cast<Uint8>(greenTotal / 9);
+            auto blue = static_cast<Uint8>(blueTotal / 9);
 
             setPixel(x, y, red, green, blue);
         }
@@ -132,8 +136,6 @@ void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue) {
     color += blue;
     color <<= 8;
     color += 0xFF;
-
-    // RGBA
 
     m_buffer1[(y * SCREEN_WIDTH) + x] = color;
 }
