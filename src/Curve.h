@@ -25,7 +25,6 @@ public:
     const std::vector< std::pair<double, double > > getNormalizedData(int WIDTH, int HEIGHT);
     bool processEvents();
     void randomizeFactors();
-public:
     void calculateCurve();
 };
 

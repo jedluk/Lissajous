@@ -8,6 +8,7 @@
 #include <iostream>
 #include <SDL_events.h>
 #include <ctime>
+#include <SDL_timer.h>
 
 void Curve::calculateCurve() {
     if(xValuesVector.size() > 0 ){
@@ -71,7 +72,7 @@ bool Curve::processEvents() {
 void Curve::randomizeFactors() {
     A_factor = rand() % 10;
     b_factor = static_cast<double>(rand()) / RAND_MAX * M_PI;
-    c_factor =static_cast<double>(rand()) / RAND_MAX * M_PI;
+    c_factor = static_cast<double>(rand()) / RAND_MAX * M_PI;
     D_factor = rand() % 10;
     e_factor = static_cast<double>(rand()) / RAND_MAX * M_PI;
 }
