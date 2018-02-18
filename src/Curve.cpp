@@ -59,9 +59,12 @@ bool Curve::processEvents() {
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym){
                     case 97:
-                        std::cout << "Coefficients are randomized " << std::endl;
+                        std::cout << "Coefficients has been randomized " << std::endl;
                         randomizeFactors();
                         calculateCurve();
+                        break;
+                    case 115:
+                        std::cout << "bitmap has been saved" << std::endl;
                         break;
                 }
         }

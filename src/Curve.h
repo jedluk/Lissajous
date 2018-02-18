@@ -6,6 +6,7 @@
 #define LISSAJOUS_CURVE_H
 
 #include <vector>
+#include "Bitmap.h"
 
 class Curve {
 public:
