@@ -28,8 +28,8 @@ int main(int argc, char *argv[]){
         auto normalizedData = curve.getNormalizedData(screen.SCREEN_WIDTH, screen.SCREEN_HEIGHT);
 
         for (unsigned int i = 0 ; i < Curve::SAMPLES ; i++){
-            auto x = static_cast<int>(normalizedData.at(i).first) + screen.SCREEN_WIDTH * 3 / 4;
-            auto y = static_cast<int>(normalizedData.at(i).second) + screen.SCREEN_HEIGHT * 3 / 4;
+            auto x = static_cast<int>(normalizedData.at(i).first) + screen.SCREEN_WIDTH;
+            auto y = static_cast<int>(normalizedData.at(i).second) + screen.SCREEN_HEIGHT;
             screen.setPixel(x,y,green,red,blue);
         }
         screen.boxBlur();

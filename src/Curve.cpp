@@ -43,8 +43,8 @@ Curve::Curve():
 const std::vector<std::pair<double, double> > Curve::getNormalizedData(int WIDTH, int HEIGHT) {
     std::vector<std::pair<double, double>> normalizedData;
     for(unsigned int i = 0 ; i  < xValuesVector.size(); i++){
-        double xNormalized = (xValuesVector.at(i) - A_factor) / (A_factor - A_factor*(-1)) * WIDTH/2;
-        double yNormalized = (yValuesVector.at(i) - D_factor) / (D_factor - D_factor*(-1)) * HEIGHT/2;
+        double xNormalized = (xValuesVector.at(i) - A_factor) / (A_factor - A_factor*(-1)) * WIDTH;
+        double yNormalized = (yValuesVector.at(i) - D_factor) / (D_factor - D_factor*(-1)) * HEIGHT;
         normalizedData.push_back(std::make_pair(xNormalized,yNormalized));
     }
     return normalizedData;
