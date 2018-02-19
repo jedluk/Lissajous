@@ -24,7 +24,7 @@ bool Bitmap::write(string filename) {
     infoHeader.height = m_height;
 
     ofstream file;
-    filename += std::to_string(bitmapNumber++);
+    filename += std::to_string(bitmapNumber++) + ".bmp";
     file.open(filename, ios::out | ios::binary);
 
     if (!file) {

@@ -16,7 +16,6 @@ int main(int argc, char *argv[]){
     ConsoleMenu::generateInitialContent();
     Screen screen;
     Curve curve;
-    Bitmap bitmap(screen.SCREEN_WIDTH, screen.SCREEN_HEIGHT);
 
     if(!screen.init())
         std::cout << "Error initializing SDL" << std::endl;
@@ -38,7 +37,7 @@ int main(int argc, char *argv[]){
         screen.boxBlur();
         screen.update();
 
-        if(!screen.processEvents(bitmap)){
+        if(!screen.processEvents()){
             break;
         }
 

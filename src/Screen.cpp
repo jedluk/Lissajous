@@ -2,7 +2,13 @@
 #include <string>
 
 Screen::Screen() :
-        m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer1(NULL), m_buffer2(NULL) {
+        m_window(NULL),
+        m_renderer(NULL),
+        m_texture(NULL),
+        m_buffer1(NULL),
+        m_buffer2(NULL),
+        bitmap(SCREEN_WIDTH,SCREEN_HEIGHT)
+{
 
 }
 
@@ -55,7 +61,7 @@ bool Screen::init() {
     return true;
 }
 
-bool Screen::processEvents(Bitmap &bitmap) {
+bool Screen::processEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -64,10 +70,13 @@ bool Screen::processEvents(Bitmap &bitmap) {
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym){
                     case 114:
-                        // notify Curve to refresh parameters
+                        // notify observer - event: refresh
+                        std::cout << "I want randomize factors !!!" << std::endl;
                         break;
                     case 115:
-                        //save bitmap
+                        // notify observer - event: save
+                        std::cout << "I want save factors !!!" << std::endl;
+                        save();
                         break;
                 }
         }
@@ -156,22 +165,14 @@ void Screen::close() {
     SDL_Quit();
 }
 
-
-//        SDL_Event event;
-//        while (SDL_PollEvent(&event)) {
-//            if (event.type == SDL_KEYDOWN) {
-//                std::cout << "key pressed " << event.key.keysym.sym << std::endl;
-//                if (event.key.keysym.sym == 115) {
-//                    for (int x = 0; x < screen.SCREEN_WIDTH; x++)
-//                        for (int y = 0; y < screen.SCREEN_HEIGHT; y++)
-//                            bitmap.setPixel(x, y, 0, 0, 0);
-//
-//                    for (auto const &value: normalizedData)
-//                        bitmap.setPixel(static_cast<int>(value.first)  + screen.SCREEN_WIDTH,
-//                                        static_cast<int>(value.second) + screen.SCREEN_HEIGHT,a
-//                                        green, red, blue);
-//                    bitmap.write("test.bmp");
-//                    return false;
-//                }
-//            }
-//        }
+void Screen::save() {
+    for (int x = 0; x < SCREEN_WIDTH; x++){
+        for (int y = 0; y < SCREEN_HEIGHT; y++) {
+            bitmap.setPixel(x, y,
+                    /* RED   */  static_cast<uint8_t>((m_buffer1[(y * SCREEN_WIDTH) + x] & 0xFF000000) >> 24),
+                    /* GREEN */  static_cast<uint8_t>((m_buffer1[(y * SCREEN_WIDTH) + x] & 0x00FF0000) >> 16),
+                    /* BLUE  */  static_cast<uint8_t>((m_buffer1[(y * SCREEN_WIDTH) + x] & 0x0000FF00) >> 8));
+        }
+    }
+    bitmap.write("bitmap");
+}
