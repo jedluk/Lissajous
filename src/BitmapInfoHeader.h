@@ -6,7 +6,6 @@
 #define LISSAJOUS_BITMAPINFOHEADER_H
 
 #include <cstdint>
-using namespace std;
 
 #pragma pack(push, 2)
 

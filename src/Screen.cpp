@@ -55,14 +55,21 @@ bool Screen::init() {
     return true;
 }
 
-bool Screen::processEvents() {
+bool Screen::processEvents(Bitmap &bitmap) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT:
                 return false;
             case SDL_KEYDOWN:
-                cout << event.key.keysym.sym << endl;
+                switch(event.key.keysym.sym){
+                    case 114:
+                        // notify Curve to refresh parameters
+                        break;
+                    case 115:
+                        //save bitmap
+                        break;
+                }
         }
     }
     return true;
@@ -148,3 +155,23 @@ void Screen::close() {
     SDL_DestroyWindow(m_window);
     SDL_Quit();
 }
+
+
+//        SDL_Event event;
+//        while (SDL_PollEvent(&event)) {
+//            if (event.type == SDL_KEYDOWN) {
+//                std::cout << "key pressed " << event.key.keysym.sym << std::endl;
+//                if (event.key.keysym.sym == 115) {
+//                    for (int x = 0; x < screen.SCREEN_WIDTH; x++)
+//                        for (int y = 0; y < screen.SCREEN_HEIGHT; y++)
+//                            bitmap.setPixel(x, y, 0, 0, 0);
+//
+//                    for (auto const &value: normalizedData)
+//                        bitmap.setPixel(static_cast<int>(value.first)  + screen.SCREEN_WIDTH,
+//                                        static_cast<int>(value.second) + screen.SCREEN_HEIGHT,a
+//                                        green, red, blue);
+//                    bitmap.write("test.bmp");
+//                    return false;
+//                }
+//            }
+//        }

@@ -50,32 +50,11 @@ const std::vector<std::pair<double, double> > Curve::getNormalizedData(int WIDTH
     return normalizedData;
 }
 
-bool Curve::processEvents() {
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        switch (event.type) {
-            case SDL_QUIT:
-                return false;
-            case SDL_KEYDOWN:
-                switch(event.key.keysym.sym){
-                    case 97:
-                        std::cout << "Coefficients has been randomized " << std::endl;
-                        randomizeFactors();
-                        calculateCurve();
-                        break;
-                    case 115:
-                        std::cout << "bitmap has been saved" << std::endl;
-                        break;
-                }
-        }
-    }
-    return true;
-}
-
 void Curve::randomizeFactors() {
     A_factor = rand() % 10;
     b_factor = static_cast<double>(rand()) / RAND_MAX * M_PI;
     c_factor = static_cast<double>(rand()) / RAND_MAX * M_PI;
     D_factor = rand() % 10;
     e_factor = static_cast<double>(rand()) / RAND_MAX * M_PI;
+    calculateCurve();
 }

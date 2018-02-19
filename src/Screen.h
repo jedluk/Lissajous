@@ -6,6 +6,7 @@
 #define LISSAJOUS_SCREEN_H
 
 #include "SDL.h"
+#include "Bitmap.h"
 #include <iostream>
 
 using namespace std;
@@ -29,7 +30,7 @@ public:
     bool init();
     void update();
     void setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
-    bool processEvents();
+    bool processEvents(Bitmap &bitmap);
     void close();
     void clear();
     void boxBlur();

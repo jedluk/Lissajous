@@ -21,12 +21,12 @@ private:
     std::vector<double> timeVector;
     std::vector<double> xValuesVector;
     std::vector<double> yValuesVector;
+private:
+    void calculateCurve();
 public:
     Curve();
     const std::vector< std::pair<double, double > > getNormalizedData(int WIDTH, int HEIGHT);
-    bool processEvents();
     void randomizeFactors();
-    void calculateCurve();
 };
 
 #endif //LISSAJOUS_CURVE_H

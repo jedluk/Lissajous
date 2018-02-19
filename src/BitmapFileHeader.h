@@ -5,7 +5,6 @@
 #ifndef LISSAJOUS_BITMAPFILEHEADER_H
 #define LISSAJOUS_BITMAPFILEHEADER_H
 #include <cstdint>
-using namespace std;
 
 #pragma pack(push, 2)
 
