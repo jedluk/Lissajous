@@ -9,6 +9,8 @@ set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib/x64)
 
-set(SOURCE_FILES src/main.cpp src/Screen.cpp src/Screen.h src/ConsoleMenu.cpp src/ConsoleMenu.h src/Curve.cpp src/Curve.h src/BitmapFileHeader.h src/BitmapInfoHeader.h src/Bitmap.cpp src/Bitmap.h)
+set(SOURCE_FILES    src/main.cpp src/Screen.cpp src/Screen.h src/ConsoleMenu.cpp
+                    src/ConsoleMenu.h src/Curve.cpp src/Curve.h src/BitmapFileHeader.h
+                    src/BitmapInfoHeader.h src/Bitmap.cpp src/Bitmap.h src/ISceneObserver.h)
 add_executable(Lissajous ${SOURCE_FILES})
 target_link_libraries(Lissajous SDL2main SDL2)
