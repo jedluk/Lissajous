@@ -70,12 +70,10 @@ bool Screen::processEvents() {
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym){
                     case 114:
-                        // notify observer - event: refresh
-                        std::cout << "I want randomize factors !!!" << std::endl;
+                        notifyOnRefreshParams();
                         break;
                     case 115:
-                        // notify observer - event: save
-                        std::cout << "I want save factors !!!" << std::endl;
+                        notifyOnSaveBitmap();
                         save();
                         break;
                 }
@@ -85,7 +83,6 @@ bool Screen::processEvents() {
 }
 
 void Screen::boxBlur() {
-    //A Swap the buffers, so pixel is in m_buffer2 and we are drawing to m_buffer1
     Uint32 *temp = m_buffer1;
     m_buffer1 = m_buffer2;
     m_buffer2 = temp;
@@ -175,4 +172,24 @@ void Screen::save() {
         }
     }
     bitmap.write("bitmap");
+}
+// SCREEN OBSERVERS METHODS
+void Screen::addObserver(ISceneObserver &ref) {
+    observers.insert(item(&ref,&ref));
+}
+
+void Screen::removeObserver(ISceneObserver &ref) {
+    observers.erase(&ref);
+}
+
+void Screen::notifyOnSaveBitmap() {
+    for(auto observer: observers){
+        observer.first->handleSaveBitmapEvent();
+    }
+}
+
+void Screen::notifyOnRefreshParams() {
+    for(auto observer: observers){
+        observer.first->handleRefreshParamsEvent();
+    }
 }

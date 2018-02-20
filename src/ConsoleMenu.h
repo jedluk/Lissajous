@@ -12,7 +12,7 @@ class ConsoleMenu {
 public:
     static void generateInitialContent();
     static void printManual();
-    static void printCurveParametrs(std::vector<double> coefficients);
+    static void printCurveParameters(double array[]);
 };
 
 

@@ -8,10 +8,11 @@
 #include <iostream>
 #include <SDL_events.h>
 #include <ctime>
+#include "ConsoleMenu.h"
 #include <SDL_timer.h>
 
 void Curve::calculateCurve() {
-    if(xValuesVector.size() > 0 ){
+    if(!xValuesVector.empty()){
         xValuesVector.clear();
         yValuesVector.clear();
     }
@@ -25,11 +26,11 @@ void Curve::calculateCurve() {
 }
 
 Curve::Curve():
-    A_factor(6),
-    b_factor(M_PI/2),
-    c_factor(M_PI/6),
-    D_factor(2),
-    e_factor(M_PI/3)
+    A_factor(3),
+    b_factor(5),
+    c_factor(0),
+    D_factor(3),
+    e_factor(4)
 {
     double step = static_cast<double>(TIME_LIMIT)/SAMPLES;
     double time = 0;
@@ -45,7 +46,7 @@ const std::vector<std::pair<double, double> > Curve::getNormalizedData(int WIDTH
     for(unsigned int i = 0 ; i  < xValuesVector.size(); i++){
         double xNormalized = (xValuesVector.at(i) - A_factor) / (A_factor - A_factor*(-1)) * WIDTH;
         double yNormalized = (yValuesVector.at(i) - D_factor) / (D_factor - D_factor*(-1)) * HEIGHT;
-        normalizedData.push_back(std::make_pair(xNormalized,yNormalized));
+        normalizedData.emplace_back(xNormalized,yNormalized);
     }
     return normalizedData;
 }
@@ -57,4 +58,13 @@ void Curve::randomizeFactors() {
     D_factor = rand() % 10;
     e_factor = static_cast<double>(rand()) / RAND_MAX * M_PI;
     calculateCurve();
+}
+
+void Curve::handleSaveBitmapEvent() {
+    double coefficients[] = {A_factor, b_factor, c_factor, D_factor, e_factor};
+    ConsoleMenu::printCurveParameters(coefficients);
+}
+
+void Curve::handleRefreshParamsEvent() {
+    randomizeFactors();
 }

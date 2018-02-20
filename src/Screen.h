@@ -7,7 +7,9 @@
 
 #include "SDL.h"
 #include "Bitmap.h"
+#include "ISceneObserver.h"
 #include <iostream>
+#include <map>
 
 using namespace std;
 
@@ -23,6 +25,8 @@ private:
     Uint32 *m_buffer1;
     Uint32 *m_buffer2;
     Bitmap bitmap;
+    std::map<ISceneObserver* const, ISceneObserver* const> observers;
+    typedef std::map<ISceneObserver* const, ISceneObserver* const>::value_type item;
 public:
     Screen();
     ~Screen();
@@ -34,6 +38,11 @@ public:
     void clear();
     void boxBlur();
     void save();
+public:
+    void addObserver(ISceneObserver& ref);
+    void removeObserver(ISceneObserver& ref);
+    void notifyOnSaveBitmap();
+    void notifyOnRefreshParams();
 };
 
 

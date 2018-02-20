@@ -3,7 +3,6 @@
 #include "Screen.h"
 #include "ConsoleMenu.h"
 #include "Curve.h"
-#include "Bitmap.h"
 #include <math.h>
 #include <ctime>
 
@@ -12,11 +11,10 @@ double REFRESH_TIME_MS = 5000;
 int main(int argc, char *argv[]){
 
     srand((unsigned int) time (nullptr));
-
     ConsoleMenu::generateInitialContent();
     Screen screen;
     Curve curve;
-
+    screen.addObserver(curve);
     if(!screen.init())
         std::cout << "Error initializing SDL" << std::endl;
 
@@ -43,9 +41,10 @@ int main(int argc, char *argv[]){
 
         if(SDL_GetTicks() > REFRESH_TIME_MS ){
             REFRESH_TIME_MS += 5000;
-            curve.randomizeFactors();
+            screen.notifyOnRefreshParams();
         }
     }
+    screen.removeObserver(curve);
     screen.close();
     return 0;
 }
