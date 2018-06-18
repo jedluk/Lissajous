@@ -22,5 +22,5 @@ The patterns which we can obtain by changing curves parameters are really impres
   - by double clicking on Lissajous.exe (command prompt will launch automatically in background)
 - Lissajous curves will refresh after each 5 seconds
 - You can also use mapped keyboard's keys:
-    -- R - refresh curve factor instantly
-    -- S - save current view to bitmap. It will be saved in current folder
+  - R - refresh curve factor instantly
+  - S - save current view to bitmap. It will be saved in current folder
